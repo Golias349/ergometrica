@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gallant_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gallant Connect"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/gallant_dark" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Desconectado"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/scanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="PROCURAR GALLANT" />
+
+        <TextView
+            android:id="@+id/deviceListTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Dispositivos FTMS encontrados"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/deviceList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/dataTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Dados da bicicleta"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/wattsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Potência: — W"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/cadenceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadência: — RPM"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/speedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Velocidade: — km/h"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/distanceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Distância: — m"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/heartRateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Frequência cardíaca: — bpm"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/rawText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="FTMS bruto: —"
+            android:textSize="12sp"
+            android:fontFamily="monospace" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/disconnectButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="DESCONECTAR"
+            android:enabled="false" />
+
+    </LinearLayout>
+</ScrollView>
