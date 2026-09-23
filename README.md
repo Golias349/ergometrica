@@ -1,49 +1,77 @@
 # Gallant Connect — versão 1
 
-Projeto Android para a Gallant Connect Max com Bluetooth LE / FTMS.
+Aplicativo Android de teste para a **Gallant Connect Max**, usando **Bluetooth Low Energy (BLE)** e o protocolo **FTMS (Fitness Machine Service)**.
 
 ## O que esta versão faz
 
-- Procura dispositivos que anunciam o serviço FTMS.
-- Conecta à bicicleta.
-- Lê a característica FTMS Indoor Bike Data (0x2AD2).
+- Procura dispositivos que anunciam o serviço FTMS (0x1826).
+- Mostra os dispositivos encontrados.
+- Conecta à bicicleta por Bluetooth LE.
+- Descobre a característica **Indoor Bike Data (0x2AD2)**.
+- Ativa notificações da bicicleta.
+- Interpreta os campos disponíveis no pacote FTMS.
 - Mostra:
   - Watts
   - RPM/cadência
-  - velocidade
-  - distância
-  - frequência cardíaca, se a bicicleta enviar
-  - calorias, se a bicicleta enviar
-- Possui botão para solicitar início/retomada do treino quando o equipamento aceita o comando FTMS.
+  - Velocidade
+  - Distância
+  - Frequência cardíaca, se enviada pela bicicleta
+  - Pacote FTMS bruto em hexadecimal para diagnóstico
 
-## Como abrir
-
-1. Instale o Android Studio.
-2. Abra a pasta `GallantConnect`.
-3. Espere o Gradle sincronizar.
-4. Conecte o celular por USB.
-5. Ative as opções de desenvolvedor/depuração USB no celular.
-6. Execute o projeto no aparelho.
+> A disponibilidade de cada métrica depende do que a unidade da Gallant realmente transmite.
 
 ## Teste com a Gallant
 
-1. Coloque a bateria da bicicleta.
-2. Abra o app.
-3. Dê permissão ao Bluetooth.
-4. Toque em `PROCURAR GALLANT`.
-5. Procure `GLT2.5...` ou o nome da bicicleta.
-6. Toque no dispositivo.
-7. Aguarde `Pronto. Comece a pedalar.`
-8. Pedale e observe watts/RPM/km/h.
+1. Coloque uma bateria na bicicleta.
+2. Abra o aplicativo.
+3. Dê as permissões Bluetooth solicitadas.
+4. Toque em **PROCURAR GALLANT**.
+5. Procure o dispositivo, por exemplo `GLT2.5...`, ou o nome anunciado pela bicicleta.
+6. Toque no dispositivo encontrado.
+7. Aguarde a mensagem de conexão.
+8. Comece a pedalar e observe os dados.
 
-## Observação
+## Importante sobre o teste
 
-A Gallant Connect Max é anunciada pelo fabricante com Bluetooth 4.0 e métricas como distância, tempo, calorias, resistência, frequência cardíaca, cadência e potência. A disponibilidade de cada campo depende do que a bicicleta realmente transmite por FTMS.
+Esta é uma primeira versão técnica para confirmar o pacote FTMS real transmitido pela bicicleta.
 
-Esta é uma primeira versão de teste; o objetivo é confirmar o pacote FTMS real transmitido pela sua unidade antes de adicionar histórico, gráficos, metas e outras funções.
+Se algum campo aparecer como `—`, isso pode significar que a bicicleta não está enviando esse campo naquele pacote. O campo **FTMS bruto** foi incluído para facilitar a análise do protocolo real.
 
 ## Compilação automática no GitHub Actions
 
-O projeto inclui `.github/workflows/build-apk.yml`. Depois de subir o projeto para um repositório GitHub, abra **Actions**, execute **Build Gallant Connect APK** (ou faça push na `main`/`master`) e, ao terminar, baixe o artefato **Gallant-Connect-debug**. Dentro dele estará `app-debug.apk`.
+O projeto inclui:
 
-Esta é uma versão de teste/depuração. Para publicar na Google Play, será necessário configurar assinatura de release.
+`.github/workflows/build-apk.yml`
+
+No GitHub:
+
+1. Abra a aba **Actions**.
+2. Entre em **Build Gallant Connect APK**.
+3. Aguarde a compilação.
+4. Abra a execução concluída.
+5. Na seção **Artifacts**, baixe `Gallant-Connect-debug`.
+
+O arquivo gerado é:
+
+`app-debug.apk`
+
+Esta versão é de teste/debug. Para publicação na Google Play, será necessário configurar assinatura de release e as etapas de publicação.
+
+## Estrutura
+
+```text
+ergometrica/
+├── .github/workflows/build-apk.yml
+├── app/
+│   ├── src/main/java/com/golias349/gallantconnect/
+│   │   ├── MainActivity.kt
+│   │   ├── BleFtmsManager.kt
+│   │   └── FtmsParser.kt
+│   ├── src/main/res/layout/activity_main.xml
+│   ├── src/main/res/values/
+│   ├── build.gradle.kts
+│   └── proguard-rules.pro
+├── build.gradle.kts
+├── gradle.properties
+└── settings.gradle.kts
+```
